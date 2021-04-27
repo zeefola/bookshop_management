@@ -15,7 +15,7 @@
                         <ol class="breadcrumb float-sm-right">
                             <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-author"
                                     style="color:white;">
-                                    Create </a>
+                                    Add New </a>
                             </button>
 
                         </ol>
@@ -87,6 +87,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $authors->links() }}
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

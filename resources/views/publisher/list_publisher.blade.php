@@ -83,6 +83,7 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+                    {{ $publishers->links() }}
                 </div>
                 <!-- /.card -->
 

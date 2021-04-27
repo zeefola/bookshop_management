@@ -44,14 +44,14 @@
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="first_name"
-                                                placeholder="First Name">
+                                                placeholder="First Name" value="{{ old('first_name') }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputPassword3" class="col-sm-2 col-form-label">Last Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="last_name"
-                                                placeholder="Last Name">
+                                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"
+                                                value="{{ old('last_name') }}">
                                         </div>
                                     </div>
                                 </div>

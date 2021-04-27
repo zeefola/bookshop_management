@@ -9,13 +9,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Authors</h1>
+                        <h1>Employees</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-author"
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-employee"
                                     style="color:white;">
-                                    Create </a>
+                                    Add New </a>
                             </button>
 
                         </ol>
@@ -26,11 +26,11 @@
 
         <!-- Main content -->
         <section class="content">
-            @if ($authors->count() > 0)
+            @if ($employees->count() > 0)
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Author Info</h3>
+                        <h3 class="card-title">Employee Info</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -48,35 +48,59 @@
                                     <th style="width: 1%">
                                         #
                                     </th>
-                                    <th style="width: 20%">
+                                    <th style="width: 10%">
                                         First Name
                                     </th>
-                                    <th style="width: 30%">
+                                    <th style="width: 10%">
                                         Last Name
+                                    </th>
+                                    <th style="width: 15%">
+                                        Phone Number
+                                    </th>
+                                    <th style="width: 20%">
+                                        Address
+                                    </th>
+                                    <th style="width: 10%">
+                                        Email
+                                    </th>
+                                    <th style="width: 5%">
+                                        Gender
                                     </th>
                                     <th style="width: 20%">
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($authors as $author)
+                                @foreach ($employees as $employee)
                                     <tr>
                                         <td>
-                                            {{ $author->id }}
+                                            {{ $employee->id }}
                                         </td>
                                         <td>
-                                            {{ $author->first_name }}
+                                            {{ $employee->first_name }}
                                         </td>
                                         <td>
-                                            {{ $author->last_name }}
+                                            {{ $employee->last_name }}
+                                        </td>
+                                        <td>
+                                            {{ $employee->phone_number }}
+                                        </td>
+                                        <td>
+                                            {{ $employee->address }}
+                                        </td>
+                                        <td>
+                                            {{ $employee->email }}
+                                        </td>
+                                        <td>
+                                            {{ $employee->gender }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="/edit-employee/{{ $employee->id }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
+                                            <a class="btn btn-danger btn-sm" href="/delete-employee/{{ $employee->id }}">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
@@ -87,6 +111,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $employees->links() }}
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

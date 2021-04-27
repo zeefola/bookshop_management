@@ -9,13 +9,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Authors</h1>
+                        <h1>Sales</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-author"
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-sale"
                                     style="color:white;">
-                                    Create </a>
+                                    Add New </a>
                             </button>
 
                         </ol>
@@ -26,11 +26,11 @@
 
         <!-- Main content -->
         <section class="content">
-            @if ($authors->count() > 0)
+            @if ($sales->count() > 0)
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Author Info</h3>
+                        <h3 class="card-title">sale Info</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -48,35 +48,59 @@
                                     <th style="width: 1%">
                                         #
                                     </th>
-                                    <th style="width: 20%">
-                                        First Name
+                                    <th style="width: 10%">
+                                        Book ID
                                     </th>
-                                    <th style="width: 30%">
-                                        Last Name
+                                    <th style="width: 10%">
+                                        Customer ID
+                                    </th>
+                                    <th style="width: 10%">
+                                        Employee ID
+                                    </th>
+                                    <th style="width: 15%">
+                                        Quantity
+                                    </th>
+                                    <th style="width: 10%">
+                                        Price
+                                    </th>
+                                    <th style="width: 8%" class="text-center">
+                                        Sale Date
                                     </th>
                                     <th style="width: 20%">
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($authors as $author)
+                                @foreach ($sales as $sale)
                                     <tr>
                                         <td>
-                                            {{ $author->id }}
+                                            {{ $sale->id }}
                                         </td>
                                         <td>
-                                            {{ $author->first_name }}
+                                            {{ $sale->book_id }}
                                         </td>
                                         <td>
-                                            {{ $author->last_name }}
+                                            {{ $sale->customer_id }}
+                                        </td>
+                                        <td>
+                                            {{ $sale->employee_id }}
+                                        </td>
+                                        <td>
+                                            {{ $sale->quantity }}
+                                        </td>
+                                        <td>
+                                            {{ $sale->price }}
+                                        </td>
+                                        <td>
+                                            {{ date('d-M-Y', strtotime($sale->sales_date)) }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="/edit-sale/{{ $sale->id }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
+                                            <a class="btn btn-danger btn-sm" href="/delete-sale/{{ $sale->id }}">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
@@ -88,6 +112,7 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+                    {{ $sales->links() }}
                 </div>
                 <!-- /.card -->
 

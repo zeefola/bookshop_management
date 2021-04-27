@@ -26,7 +26,7 @@ class CreateBooksTable extends Migration
                 ->onDelete('cascade');
             $table->string('book_edition')->nullable();
             $table->string('isbn_number')->nullable();
-            $table->date('published_date')->nullable();
+            $table->year('published_date', 4)->nullable();
             $table->string('published_country')->nullable();
             $table->timestamps();
         });

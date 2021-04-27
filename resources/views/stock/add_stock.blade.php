@@ -8,11 +8,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Authors</h1>
+                        <h1>Stocks</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/authors"
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/stocks"
                                     style="color:white;">
                                     Go back </a>
                             </button>
@@ -33,31 +33,45 @@
                         <!-- Horizontal Form -->
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Add Author</h3>
+                                <h3 class="card-title">Add Stock</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="/add-author" method="POST">
+                            <form class="form-horizontal" action="/add-stock" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Book ID</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="first_name"
-                                                placeholder="First Name">
+                                            <input type="text" class="form-control" name="book_id"
+                                                value="{{ old('book_id') }}" placeholder="Book ID">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputPassword3" class="col-sm-2 col-form-label">Last Name</label>
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Quantity</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="last_name"
-                                                placeholder="Last Name">
+                                            <input type="number" class="form-control" name="quantity"
+                                                value="{{ old('quantity') }}" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Price</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="price"
+                                                value="{{ old('price') }}" placeholder="price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Stock Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="stock_date"
+                                                value="{{ old('stock_date') }}" placeholder="Stock Date">
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-info">Sign in</button>
+                                    <button type="submit" class="btn btn-info">Add</button>
                                     <button type="reset" class="btn btn-default float-right">Cancel</button>
                                 </div>
                                 <!-- /.card-footer -->

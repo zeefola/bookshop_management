@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ url('css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ url('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    @yield('style')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -65,6 +66,7 @@
     <script src="{{ url('js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ url('js/pages/dashboard.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>

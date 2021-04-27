@@ -9,13 +9,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Authors</h1>
+                        <h1>Stocks</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-author"
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-stock"
                                     style="color:white;">
-                                    Create </a>
+                                    Add New </a>
                             </button>
 
                         </ol>
@@ -26,11 +26,11 @@
 
         <!-- Main content -->
         <section class="content">
-            @if ($authors->count() > 0)
+            @if ($stocks->count() > 0)
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Author Info</h3>
+                        <h3 class="card-title">Stock Info</h3>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -49,34 +49,46 @@
                                         #
                                     </th>
                                     <th style="width: 20%">
-                                        First Name
+                                        Book ID
                                     </th>
-                                    <th style="width: 30%">
-                                        Last Name
+                                    <th style="width: 20%">
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th style="width: 20%">
+                                        Stock Date
                                     </th>
                                     <th style="width: 20%">
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($authors as $author)
+                                @foreach ($stocks as $stock)
                                     <tr>
                                         <td>
-                                            {{ $author->id }}
+                                            {{ $stock->id }}
                                         </td>
                                         <td>
-                                            {{ $author->first_name }}
+                                            {{ $stock->book_id }}
                                         </td>
                                         <td>
-                                            {{ $author->last_name }}
+                                            {{ $stock->quantity }}
+                                        </td>
+                                        <td>
+                                            {{ $stock->price }}
+                                        </td>
+                                        <td>
+                                            {{ date('d-M-Y', strtotime($stock->stock_date)) }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href="/edit-stock/{{ $stock->id }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#">
+                                            <a class="btn btn-danger btn-sm" href="/delete-stock/{{ $stock->id }}">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
@@ -88,6 +100,7 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
+                    {{ $stocks->links() }}
                 </div>
                 <!-- /.card -->
 

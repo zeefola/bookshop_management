@@ -44,7 +44,7 @@
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Publisher Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="publisher_name"
-                                                placeholder="Publisher Name">
+                                                placeholder="Publisher Name" value="{{ old('publisher_name') }}">
                                         </div>
                                     </div>
                                 </div>
