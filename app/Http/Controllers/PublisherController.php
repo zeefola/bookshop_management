@@ -43,6 +43,10 @@ class PublisherController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'publisher_name' => 'required',
+        ));
         $publisher = Publisher::find($id);
         $publisher->publisher_name = request()->publisher_name;
         $publisher->save();

@@ -27,7 +27,7 @@ class CustomerController extends Controller
             'last_name' => 'required',
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email:rfc,dns',
             'gender' => 'required'
         ));
 
@@ -54,6 +54,15 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'gender' => 'required'
+        ));
         $customer = Customer::find($id);
         $customer->first_name = request()->first_name;
         $customer->last_name = request()->last_name;

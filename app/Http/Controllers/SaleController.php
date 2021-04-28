@@ -54,6 +54,15 @@ class SaleController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'book_id' => 'required',
+            'customer_id' => 'required',
+            'employee_id' => 'required',
+            'quantity' => 'required',
+            'price' => 'required',
+            'sales_date' => 'required'
+        ));
         $sale = Sale::find($id);
         $sale->book_id = request()->book_id;
         $sale->quantity = request()->quantity;

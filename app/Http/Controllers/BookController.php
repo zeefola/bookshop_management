@@ -23,24 +23,26 @@ class BookController extends Controller
     {
         //Validate what's coming in
         $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email',
-            'gender' => 'required'
+            'book_title' => 'required',
+            'author_id' => 'required',
+            'publisher_id' => 'required',
+            'book_edition' => 'required',
+            'isbn_number' => 'required',
+            'published_date' => 'required',
+            'published_country'
         ));
 
         $book = new Book();
-        $book->first_name = request()->first_name;
-        $book->last_name = request()->last_name;
-        $book->phone_number = request()->phone_number;
-        $book->address = request()->address;
-        $book->email = request()->email;
-        $book->gender = request()->gender;
+        $book->book_title = request()->book_title;
+        $book->author_id = request()->author_id;
+        $book->publisher_id = request()->publisher_id;
+        $book->book_edition = request()->book_edition;
+        $book->isbn_number = request()->isbn_number;
+        $book->published_date = request()->published_date;
+        $book->published_country = request()->published_country;
         $book->save();
 
-        session()->flash('success_report', 'book Added Successfully');
+        session()->flash('success_report', 'Book Added Successfully');
         return back();
     }
 
@@ -51,19 +53,30 @@ class BookController extends Controller
             ->with('book', $book);
     }
 
-    public function update(Request $request)
+    public function update()
     {
-        $id = $request->id;
+        $id = request()->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'book_title' => 'required',
+            'author_id' => 'required',
+            'publisher_id' => 'required',
+            'book_edition' => 'required',
+            'isbn_number' => 'required',
+            'published_date' => 'required',
+            'published_country'
+        ));
         $book = Book::find($id);
-        $book->first_name = request()->first_name;
-        $book->last_name = request()->last_name;
-        $book->phone_number = request()->phone_number;
-        $book->address = request()->address;
-        $book->email = request()->email;
-        $book->gender = request()->gender;
+        $book->book_title = request()->book_title;
+        $book->author_id = request()->author_id;
+        $book->publisher_id = request()->publisher_id;
+        $book->book_edition = request()->book_edition;
+        $book->isbn_number = request()->isbn_number;
+        $book->published_date = request()->published_date;
+        $book->published_country = request()->published_country;
         $book->save();
 
-        session()->flash('success_report', 'book Updated Successfully');
+        session()->flash('success_report', 'Book Updated Successfully');
         return back();
     }
 

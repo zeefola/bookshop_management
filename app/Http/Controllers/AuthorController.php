@@ -46,6 +46,11 @@ class AuthorController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ));
         $author = Author::find($id);
         $author->first_name = request()->first_name;
         $author->last_name = request()->last_name;

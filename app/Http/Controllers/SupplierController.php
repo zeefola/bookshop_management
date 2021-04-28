@@ -28,7 +28,7 @@ class SupplierController extends Controller
             'book_id' => 'required',
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email:rfc,dns',
         ));
 
         $supplier = new Supplier();
@@ -54,6 +54,15 @@ class SupplierController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'book_id' => 'required',
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'email' => 'required|email:rfc,dns',
+        ));
         $supplier = Supplier::find($id);
         $supplier->first_name = request()->first_name;
         $supplier->last_name = request()->last_name;

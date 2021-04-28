@@ -49,22 +49,25 @@
                                         #
                                     </th>
                                     <th style="width: 10%">
-                                        First Name
+                                        Book Title
                                     </th>
                                     <th style="width: 10%">
-                                        Last Name
+                                        Author ID
+                                    </th>
+                                    <th style="width: 10%">
+                                        Publisher ID
+                                    </th>
+                                    <th style="width: 10%">
+                                        Book Edition
+                                    </th>
+                                    <th style="width: 10%">
+                                        ISBN Number
                                     </th>
                                     <th style="width: 15%">
-                                        Phone Number
+                                        Year of Publish
                                     </th>
-                                    <th style="width: 20%">
-                                        Address
-                                    </th>
-                                    <th style="width: 10%">
-                                        Email
-                                    </th>
-                                    <th style="width: 5%">
-                                        Gender
+                                    <th style="width: 15%">
+                                        Published Country
                                     </th>
                                     <th style="width: 20%">
                                     </th>
@@ -77,22 +80,25 @@
                                             {{ $book->id }}
                                         </td>
                                         <td>
-                                            {{ $book->first_name }}
+                                            {{ $book->book_title }}
                                         </td>
                                         <td>
-                                            {{ $book->last_name }}
+                                            {{ $book->author_id }}
                                         </td>
                                         <td>
-                                            {{ $book->phone_number }}
+                                            {{ $book->publisher_id }}
                                         </td>
                                         <td>
-                                            {{ $book->address }}
+                                            {{ $book->book_edition }}
                                         </td>
                                         <td>
-                                            {{ $book->email }}
+                                            {{ $book->isbn_number }}
                                         </td>
                                         <td>
-                                            {{ $book->gender }}
+                                            {{ $book->published_date }}
+                                        </td>
+                                        <td>
+                                            {{ $book->published_country }}
                                         </td>
                                         <td class="project-actions text-right">
                                             <a class="btn btn-info btn-sm" href="/edit-book/{{ $book->id }}">

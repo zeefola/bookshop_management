@@ -50,6 +50,13 @@ class StockController extends Controller
     public function update(Request $request)
     {
         $id = $request->id;
+        //Validate what's coming in
+        $this->validate(request(), array(
+            'book_id' => 'required',
+            'quantity' => 'required',
+            'price' => 'required',
+            'stock_date' => 'required'
+        ));
         $stock = Stock::find($id);
         $stock->book_id = request()->book_id;
         $stock->quantity = request()->quantity;

@@ -1,17 +1,15 @@
 @if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <div class="application-alert-danger">
-                <li>
-                    {{ $error }}
-                </li>
-            <div>
-        @endforeach
-    </ul>
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 @endif
 
 @if (session()->has('success_report'))
-    <div class="application-alert-success">
+    <div class="alert alert-success alert-block">
         <a class="close" data-dismiss="alert" href="#">×</a>
         <h4 class="alert-heading">Success!</h4>
         {{ session()->get('success_report') }}
@@ -20,8 +18,10 @@
 @endif
 
 
+
+
 @if (session()->has('failure_report'))
-    <div class="application-alert-danger">
+    <div class="alert alert-danger alert-block">
         <a class="close" data-dismiss="alert" href="#">×</a>
         <h4 class="alert-heading">Error!</h4>
         {{ session()->get('failure_report') }}
