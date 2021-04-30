@@ -27,8 +27,12 @@ class CreateSalesTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('quantity')->nullable();
-            $table->string('price')->nllable();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
+            $table->integer('quantity')->nullable();
+            $table->decimal('price', 2)->nullable();
             $table->dateTime('sales_date')->nullable();
             $table->timestamps();
         });

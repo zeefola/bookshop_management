@@ -7,9 +7,14 @@ use App\Sale;
 
 class SaleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $sales = Sale::paginate(10);
+        $sales = auth()->user()->sales()->paginate(10);
         return view('sale.list_sale')
             ->with('sales', $sales);
     }
@@ -38,6 +43,7 @@ class SaleController extends Controller
         $sale->quantity = request()->quantity;
         $sale->price = request()->price;
         $sale->sales_date = request()->sales_date;
+        $sale->user_id = auth()->user()->id;
         $sale->save();
 
         session()->flash('success_report', 'Sale Added Successfully');

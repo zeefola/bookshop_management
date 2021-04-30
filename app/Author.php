@@ -10,4 +10,9 @@ class Author extends Model
     {
         return $this->hasMany('App\Book');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

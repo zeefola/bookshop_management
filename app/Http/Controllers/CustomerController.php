@@ -7,9 +7,14 @@ use App\Customer;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $customers = Customer::paginate(10);
+        $customers = auth()->user()->customers()->paginate(10);
         return view('customer.list_customer')
             ->with('customers', $customers);
     }
@@ -27,7 +32,8 @@ class CustomerController extends Controller
             'last_name' => 'required',
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email',
+            // 'email' => 'required|email:rfc,dns',
             'gender' => 'required'
         ));
 
@@ -38,6 +44,7 @@ class CustomerController extends Controller
         $customer->address = request()->address;
         $customer->email = request()->email;
         $customer->gender = request()->gender;
+        $customer->user_id = auth()->user()->id;
         $customer->save();
 
         session()->flash('success_report', 'Customer Added Successfully');

@@ -20,4 +20,9 @@ class Sale extends Model
     {
         return $this->belongsTo('App\Customer');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

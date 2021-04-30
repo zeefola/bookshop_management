@@ -24,6 +24,10 @@ class CreateBooksTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
             $table->string('book_edition')->nullable();
             $table->string('isbn_number')->nullable();
             $table->year('published_date', 4)->nullable();

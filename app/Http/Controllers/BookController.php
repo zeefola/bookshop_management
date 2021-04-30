@@ -7,9 +7,14 @@ use App\Book;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $books = Book::paginate(10);
+        $books = auth()->user()->books()->paginate(10);
         return view('book.list_book')
             ->with('books', $books);
     }
@@ -40,6 +45,7 @@ class BookController extends Controller
         $book->isbn_number = request()->isbn_number;
         $book->published_date = request()->published_date;
         $book->published_country = request()->published_country;
+        $book->user_id = auth()->user()->id;
         $book->save();
 
         session()->flash('success_report', 'Book Added Successfully');

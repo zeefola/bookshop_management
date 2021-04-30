@@ -7,9 +7,14 @@ use App\Stock;
 
 class StockController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $stocks = Stock::paginate(10);
+        $stocks = auth()->user()->stocks()->paginate(10);
         return view('stock.list_stock')
             ->with('stocks', $stocks);
     }
@@ -26,11 +31,13 @@ class StockController extends Controller
             'book_id' => 'required',
             'quantity' => 'required',
             'price' => 'required',
-            'stock_date' => 'required'
+            'stock_date' => 'required',
+            // 'user_id' => 'required'
         ));
 
         $stock = new Stock();
         $stock->book_id = request()->book_id;
+        $stock->user_id = auth()->user()->id;
         $stock->quantity = request()->quantity;
         $stock->price = request()->price;
         $stock->stock_date = request()->stock_date;

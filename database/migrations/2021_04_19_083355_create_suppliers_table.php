@@ -24,6 +24,10 @@ class CreateSuppliersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('address')->nllable();
             $table->string('email')->nullable();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
             // $table->string('gender')->nullable();
             $table->timestamps();
         });

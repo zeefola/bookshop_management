@@ -7,9 +7,14 @@ use App\Author;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $authors = Author::paginate(10);
+        $authors = auth()->user()->authors()->paginate(10);
         return view('author.list_author')
             ->with('authors', $authors);
     }
@@ -30,6 +35,7 @@ class AuthorController extends Controller
         $author = new Author();
         $author->first_name = request()->first_name;
         $author->last_name = request()->last_name;
+        $author->user_id = auth()->user()->id;
         $author->save();
 
         session()->flash('success_report', 'Author Added Successfully');

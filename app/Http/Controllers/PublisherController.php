@@ -9,7 +9,7 @@ class PublisherController extends Controller
 {
     public function index()
     {
-        $publishers = Publisher::paginate(10);
+        $publishers = auth()->user()->publishers()->paginate(10);
         return view('publisher.list_publisher')
             ->with('publishers', $publishers);
     }
@@ -27,6 +27,7 @@ class PublisherController extends Controller
 
         $publisher = new Publisher();
         $publisher->publisher_name = request()->publisher_name;
+        $publisher->user_id = auth()->user()->id;
         $publisher->save();
 
         session()->flash('success_report', 'Publisher Added Successfully');

@@ -21,6 +21,10 @@ class CreateCustomersTable extends Migration
             $table->string('address')->nllable();
             $table->string('email')->nullable();
             $table->string('gender')->nullable();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

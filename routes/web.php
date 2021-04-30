@@ -13,16 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('view:clear');
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
 });
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Application Routes
+// Route::middleware('auth')->group(function () {
+
+//Dashboard Route
+Route::get('/dashboard', 'HomeController@index');
 
 // Stocks Route
 Route::get('/stocks', 'StockController@index');
@@ -87,3 +96,4 @@ Route::post('/add-supplier', 'SupplierController@store');
 Route::get('/edit-supplier/{id}', 'SupplierController@edit');
 Route::post('/update-supplier/{id}', 'SupplierController@update');
 Route::get('/delete-supplier/{id}', 'SupplierController@delete');
+// });

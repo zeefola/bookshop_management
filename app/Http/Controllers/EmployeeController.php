@@ -7,9 +7,14 @@ use App\Employee;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $employees = Employee::paginate(10);
+        $employees = auth()->user()->employees()->paginate(10);
         return view('employee.list_employee')
             ->with('employees', $employees);
     }
@@ -38,6 +43,7 @@ class EmployeeController extends Controller
         $employee->address = request()->address;
         $employee->email = request()->email;
         $employee->gender = request()->gender;
+        $employee->user_id = auth()->user()->id;
         $employee->save();
 
         session()->flash('success_report', 'Employee Added Successfully');

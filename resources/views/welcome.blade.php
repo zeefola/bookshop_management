@@ -1,71 +1,88 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html class="no-js" lang="en">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <title>E-BookShop - Online BookShop Management</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <link rel="shortcut icon" href="{{ asset('welcome/images/favicon.png') }}" type="image/png">
 
-            .full-height {
-                height: 100vh;
-            }
+    <link rel="stylesheet" href="{{ asset('welcome/css/animate.css') }}">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <link rel="stylesheet" href="{{ asset('welcome/css/glide.core.css') }}">
 
-            .position-ref {
-                position: relative;
-            }
+    <link rel="stylesheet" href="{{ asset('welcome/css/bootstrap-5.0.5-alpha.min.css') }}">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+    <link rel="stylesheet" href="{{ asset('welcome/css/default.css') }}">
 
-            .content {
-                text-align: center;
-            }
+    <link rel="stylesheet" href="{{ asset('welcome/css/style.css') }}">
+</head>
 
-            .title {
-                font-size: 84px;
-            }
+<body>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+
+    <section id="home" class="header_area">
+        <div class="header_hero">
+            <div class="single_hero bg_cover d-flex align-items-center"
+                style="background-image: url(welcome/images/hero.jpg)">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10">
+                            <div class="hero_content text-center">
+                                <h2 class="hero_title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">
+                                    Welcome to Online</br>Book Shop Management</h2>
+                                <p class="wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">Manage your
+                                    stock, sales and other related bookshop data. If you're a new user click <a
+                                        href="{{ route('register') }}" style="color: #e84e4e">
+                                        here </a>
+                                    </br>to register. A returning user? Click <a href="{{ route('login') }}"
+                                        style="color: #e84e4e"> here
+                                    </a> to login to your
+                                    dashboard</p>
+                                <a href="{{ route('register') }}" class="main-btn wow fadeInUp"
+                                    data-wow-duration="1.3s" data-wow-delay="0.8s">Register</a>
+                                <a href="{{ route('login') }}" class="main-btn wow fadeInUp" data-wow-duration="1.3s"
+                                    data-wow-delay="0.8s">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ asset('welcome/js/bootstrap.bundle-5.0.0.alpha-min.js') }}"></script>
+
+    {{-- <script src="{{ asset('welcome/js/glide.min.js') }}"></script> --}}
+
+    <script src="{{ asset('welcome/js/wow.min.js') }}"></script>
+
+    <script src="{{ asset('welcome/js/main.js') }}"></script>
+
+</html>
+
+
+{{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -77,24 +94,4 @@
                         @endif
                     @endauth
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+            @endif --}}

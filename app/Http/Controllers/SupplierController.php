@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Supplier;
+use GuzzleHttp\Middleware;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
-        $suppliers = Supplier::paginate();
+        $suppliers = auth()->user()->suppliers()->paginate();
         return view('supplier.list_supplier')
             ->with('suppliers', $suppliers);
     }
@@ -38,6 +45,7 @@ class SupplierController extends Controller
         $supplier->phone_number = request()->phone_number;
         $supplier->address = request()->address;
         $supplier->email = request()->email;
+        $supplier->user_id = auth()->user()->id;
         $supplier->save();
 
         session()->flash('success_report', 'Supplier Added Successfully');

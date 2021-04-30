@@ -19,8 +19,12 @@ class CreateStocksTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('quantity')->nullable();
-            $table->string('price')->nullable();
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
+            $table->integer('quantity')->nullable();
+            $table->decimal('price', 2)->nullable();
             $table->dateTime('stock_date')->nullable();
             $table->timestamps();
         });
