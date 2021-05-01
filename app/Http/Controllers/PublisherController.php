@@ -9,7 +9,7 @@ class PublisherController extends Controller
 {
     public function index()
     {
-        $publishers = auth()->user()->publishers()->paginate(10);
+        $publishers = auth()->user()->publishers()->latest()->paginate(10);
         return view('publisher.list_publisher')
             ->with('publishers', $publishers);
     }

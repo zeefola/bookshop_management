@@ -37,25 +37,25 @@ Route::get('/dashboard', 'HomeController@index');
 Route::get('/stocks', 'StockController@index');
 Route::get('/create-stock', 'StockController@create');
 Route::post('/add-stock', 'StockController@store');
-Route::get('/edit-stock/{id}', 'StockController@edit');
-Route::post('/update-stock/{id}', 'StockController@update');
-Route::get('/delete-stock/{id}', 'StockController@delete');
+Route::get('/edit-stock/{stock}', 'StockController@edit');
+Route::post('/update-stock/{stock}', 'StockController@update');
+Route::get('/delete-stock/{stock}', 'StockController@delete');
 
 // Authors Route
 Route::get('/authors', 'AuthorController@index');
 Route::get('/create-author', 'AuthorController@create');
 Route::post('/add-author', 'AuthorController@store');
-Route::get('/edit-author/{id}', 'AuthorController@edit');
-Route::post('/update-author/{id}', 'AuthorController@update');
-Route::get('/delete-author/{id}', 'AuthorController@delete');
+Route::get('/edit-author/{author}', 'AuthorController@edit');
+Route::post('/update-author/{author}', 'AuthorController@update');
+Route::get('/delete-author/{author}', 'AuthorController@delete');
 
 // Books Route
 Route::get('/books', 'BookController@index');
 Route::get('/create-book', 'BookController@create');
 Route::post('/add-book', 'BookController@store');
-Route::get('/edit-book/{id}', 'BookController@edit');
-Route::post('/update-book/{id}', 'BookController@update');
-Route::get('/delete-book/{id}', 'BookController@delete');
+Route::get('/edit-book/{book}', 'BookController@edit');
+Route::post('/update-book/{book}', 'BookController@update');
+Route::get('/delete-book/{book}', 'BookController@delete');
 
 // Customers Route
 Route::get('/customers', 'CustomerController@index');

@@ -14,7 +14,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = auth()->user()->customers()->paginate(10);
+        $customers = auth()->user()->customers()->latest()->paginate(10);
         return view('customer.list_customer')
             ->with('customers', $customers);
     }

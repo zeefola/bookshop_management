@@ -14,7 +14,7 @@ class AuthorController extends Controller
 
     public function index()
     {
-        $authors = auth()->user()->authors()->paginate(10);
+        $authors = auth()->user()->authors()->latest()->paginate(10);
         return view('author.list_author')
             ->with('authors', $authors);
     }
@@ -42,22 +42,22 @@ class AuthorController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(Author $author)
     {
-        $author = Author::find($id);
+        // $author = Author::find($id);
         return view('author.edit_author')
             ->with('author', $author);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Author $author)
     {
-        $id = $request->id;
+        // $id = $request->id;
         //Validate what's coming in
         $this->validate(request(), array(
             'first_name' => 'required',
             'last_name' => 'required',
         ));
-        $author = Author::find($id);
+        // $author = Author::find($id);
         $author->first_name = request()->first_name;
         $author->last_name = request()->last_name;
         $author->save();
@@ -66,12 +66,11 @@ class AuthorController extends Controller
         return back();
     }
 
-    public function delete($id)
+    public function delete(Author $author)
     {
         /** Find and delete it */
-        $author = Author::find($id);
+        // $author = Author::find($id);
         $author->delete();
-
         return redirect('/authors');
     }
 }
