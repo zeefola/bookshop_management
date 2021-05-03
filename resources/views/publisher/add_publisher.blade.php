@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    Add Publisher | {{ config('app.name') }}
+@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

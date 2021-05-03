@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 use App\Employee;
 
 class EmployeeController extends Controller
@@ -24,25 +25,18 @@ class EmployeeController extends Controller
         return view('employee.add_employee');
     }
 
-    public function store()
+    public function store(EmployeeRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'gender' => 'required'
-        ));
+        $validatedData = $request->validated();
 
         $employee = new Employee();
-        $employee->first_name = request()->first_name;
-        $employee->last_name = request()->last_name;
-        $employee->phone_number = request()->phone_number;
-        $employee->address = request()->address;
-        $employee->email = request()->email;
-        $employee->gender = request()->gender;
+        $employee->first_name = $validatedData['first_name'];
+        $employee->last_name = $validatedData['last_name'];
+        $employee->phone_number = $validatedData['phone_number'];
+        $employee->address = $validatedData['address'];
+        $employee->email = $validatedData['email'];
+        $employee->gender = $validatedData['gender'];
         $employee->user_id = auth()->user()->id;
         $employee->save();
 
@@ -50,42 +44,34 @@ class EmployeeController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::find($id);
+        // $employee = Employee::find($id);
         return view('employee.edit_employee')
             ->with('employee', $employee);
     }
 
-    public function update(Request $request)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        $id = $request->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'gender' => 'required'
-        ));
-        $employee = Employee::find($id);
-        $employee->first_name = request()->first_name;
-        $employee->last_name = request()->last_name;
-        $employee->phone_number = request()->phone_number;
-        $employee->address = request()->address;
-        $employee->email = request()->email;
-        $employee->gender = request()->gender;
+        $validatedData = $request->validated();
+
+        $employee->first_name = $validatedData['first_name'];
+        $employee->last_name = $validatedData['last_name'];
+        $employee->phone_number = $validatedData['phone_number'];
+        $employee->address = $validatedData['address'];
+        $employee->email = $validatedData['email'];
+        $employee->gender = $validatedData['gender'];
         $employee->save();
 
         session()->flash('success_report', 'Employee Updated Successfully');
         return back();
     }
 
-    public function delete($id)
+    public function delete(Employee $employee)
     {
         /** Find and delete it */
-        $employee = employee::find($id);
+        // $employee = employee::find($id);
         $employee->delete();
 
         return redirect('/employees');

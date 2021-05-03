@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
 use App\Customer;
 
 class CustomerController extends Controller
@@ -24,26 +25,18 @@ class CustomerController extends Controller
         return view('customer.add_customer');
     }
 
-    public function store()
+    public function store(CustomerRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email',
-            // 'email' => 'required|email:rfc,dns',
-            'gender' => 'required'
-        ));
+        $validatedData = $request->validated();
 
         $customer = new Customer();
-        $customer->first_name = request()->first_name;
-        $customer->last_name = request()->last_name;
-        $customer->phone_number = request()->phone_number;
-        $customer->address = request()->address;
-        $customer->email = request()->email;
-        $customer->gender = request()->gender;
+        $customer->first_name = $validatedData['first_name'];
+        $customer->last_name = $validatedData['last_name'];
+        $customer->phone_number = $validatedData['phone_number'];
+        $customer->address = $validatedData['address'];
+        $customer->email = $validatedData['email'];
+        $customer->gender = $validatedData['gender'];
         $customer->user_id = auth()->user()->id;
         $customer->save();
 
@@ -51,42 +44,34 @@ class CustomerController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(Customer $customer)
     {
-        $customer = Customer::find($id);
+        // $customer = Customer::find($id);
         return view('customer.edit_customer')
             ->with('customer', $customer);
     }
 
-    public function update(Request $request)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        $id = $request->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'gender' => 'required'
-        ));
-        $customer = Customer::find($id);
-        $customer->first_name = request()->first_name;
-        $customer->last_name = request()->last_name;
-        $customer->phone_number = request()->phone_number;
-        $customer->address = request()->address;
-        $customer->email = request()->email;
-        $customer->gender = request()->gender;
+        $validatedData = $request->validated();
+
+        $customer->first_name = $validatedData['first_name'];
+        $customer->last_name = $validatedData['last_name'];
+        $customer->phone_number = $validatedData['phone_number'];
+        $customer->address = $validatedData['address'];
+        $customer->email = $validatedData['email'];
+        $customer->gender = $validatedData['gender'];
         $customer->save();
 
         session()->flash('success_report', 'Customer Updated Successfully');
         return back();
     }
 
-    public function delete($id)
+    public function delete(Customer $customer)
     {
         /** Find and delete it */
-        $customer = Customer::find($id);
+        // $customer = Customer::find($id);
         $customer->delete();
 
         return redirect('/customers');

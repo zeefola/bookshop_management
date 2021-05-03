@@ -89,16 +89,16 @@ class SaleController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Sale $sale)
     {
-        $sale = Sale::find($id);
+        // $sale = Sale::find($id);
         return view('sale.edit_sale')
             ->with('sale', $sale);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Sale $sale)
     {
-        $id = $request->id;
+        // $id = $request->id;
         //Validate what's coming in
         $this->validate(request(), array(
             'book_id' => 'required',
@@ -108,7 +108,7 @@ class SaleController extends Controller
             'price' => 'required',
             'sales_date' => 'required'
         ));
-        $sale = Sale::find($id);
+        // $sale = Sale::find($id);
         $sale->book_id = request()->book_id;
         $sale->quantity = request()->quantity;
         $sale->price = request()->price;
@@ -118,10 +118,10 @@ class SaleController extends Controller
         return back();
     }
 
-    public function delete($id)
+    public function delete(Sale $sale)
     {
         /** Find and delete it */
-        $sale = sale::find($id);
+        // $sale = sale::find($id);
         $sale->delete();
 
         return redirect('/sales');

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Book;
 use App\Publisher;
 use App\Author;
+use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
 {
@@ -26,18 +27,10 @@ class BookController extends Controller
         return view('book.add_book');
     }
 
-    public function store()
+    public function store(BookRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_title' => 'required',
-            'author_id' => 'required',
-            'publisher_id' => 'required',
-            'book_edition' => 'required',
-            'isbn_number' => 'required',
-            'published_date' => 'required',
-            'published_country'
-        ));
+        $validatedData = $request->validated();
 
         //Verify if there's a publisher and author record created by the user with that id before inserting record
         $verify_publisher = Publisher::where([
@@ -53,13 +46,13 @@ class BookController extends Controller
         if ($verify_author) {
             if ($verify_publisher) {
                 $book = new Book();
-                $book->book_title = request()->book_title;
-                $book->author_id = request()->author_id;
-                $book->publisher_id = request()->publisher_id;
-                $book->book_edition = request()->book_edition;
-                $book->isbn_number = request()->isbn_number;
-                $book->published_date = request()->published_date;
-                $book->published_country = request()->published_country;
+                $book->book_title = $validatedData['book_title'];
+                $book->author_id = $validatedData['author_id'];
+                $book->publisher_id = $validatedData['publisher_id'];
+                $book->book_edition = $validatedData['book_edition'];
+                $book->isbn_number = $validatedData['isbn_number'];
+                $book->published_date = $validatedData['published_date'];
+                $book->published_country = $validatedData['published_country'];
                 $book->user_id = auth()->user()->id;
                 $book->save();
 
@@ -86,27 +79,18 @@ class BookController extends Controller
             ->with('book', $book);
     }
 
-    public function update(Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        // $id = request()->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_title' => 'required',
-            'author_id' => 'required',
-            'publisher_id' => 'required',
-            'book_edition' => 'required',
-            'isbn_number' => 'required',
-            'published_date' => 'required',
-            'published_country'
-        ));
-        // $book = Book::find($id);
-        $book->book_title = request()->book_title;
-        $book->author_id = request()->author_id;
-        $book->publisher_id = request()->publisher_id;
-        $book->book_edition = request()->book_edition;
-        $book->isbn_number = request()->isbn_number;
-        $book->published_date = request()->published_date;
-        $book->published_country = request()->published_country;
+        $validatedData = $request->validated();
+
+        $book->book_title = $validatedData['book_title'];
+        $book->author_id = $validatedData['author_id'];
+        $book->publisher_id = $validatedData['publisher_id'];
+        $book->book_edition = $validatedData['book_edition'];
+        $book->isbn_number = $validatedData['isbn_number'];
+        $book->published_date = $validatedData['published_date'];
+        $book->published_country = $validatedData['published_country'];
         $book->save();
 
         session()->flash('success_report', 'Book Updated Successfully');

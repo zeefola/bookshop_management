@@ -6,6 +6,10 @@
         rel="stylesheet" />
 @endsection
 
+@section('title')
+    Add Book | {{ config('app.name') }}
+@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

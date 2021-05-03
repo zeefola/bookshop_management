@@ -33,14 +33,6 @@ Route::get('/', function () {
 //Dashboard Route
 Route::get('/dashboard', 'HomeController@index');
 
-// Stocks Route
-Route::get('/stocks', 'StockController@index');
-Route::get('/create-stock', 'StockController@create');
-Route::post('/add-stock', 'StockController@store');
-Route::get('/edit-stock/{stock}', 'StockController@edit');
-Route::post('/update-stock/{stock}', 'StockController@update');
-Route::get('/delete-stock/{stock}', 'StockController@delete');
-
 // Authors Route
 Route::get('/authors', 'AuthorController@index');
 Route::get('/create-author', 'AuthorController@create');
@@ -61,39 +53,47 @@ Route::get('/delete-book/{book}', 'BookController@delete');
 Route::get('/customers', 'CustomerController@index');
 Route::get('/create-customer', 'CustomerController@create');
 Route::post('/add-customer', 'CustomerController@store');
-Route::get('/edit-customer/{id}', 'CustomerController@edit');
-Route::post('/update-customer/{id}', 'CustomerController@update');
-Route::get('/delete-customer/{id}', 'CustomerController@delete');
+Route::get('/edit-customer/{customer}', 'CustomerController@edit');
+Route::post('/update-customer/{customer}', 'CustomerController@update');
+Route::get('/delete-customer/{customer}', 'CustomerController@delete');
 
 // Employees Route
 Route::get('/employees', 'EmployeeController@index');
 Route::get('/create-employee', 'EmployeeController@create');
 Route::post('/add-employee', 'EmployeeController@store');
-Route::get('/edit-employee/{id}', 'EmployeeController@edit');
-Route::post('/update-employee/{id}', 'EmployeeController@update');
-Route::get('/delete-employee/{id}', 'EmployeeController@delete');
+Route::get('/edit-employee/{employee}', 'EmployeeController@edit');
+Route::post('/update-employee/{employee}', 'EmployeeController@update');
+Route::get('/delete-employee/{employee}', 'EmployeeController@delete');
 
 // Publishers Route
 Route::get('/publishers', 'PublisherController@index');
 Route::get('/create-publisher', 'PublisherController@create');
 Route::post('/add-publisher', 'PublisherController@store');
-Route::get('/edit-publisher/{id}', 'PublisherController@edit');
-Route::post('/update-publisher/{id}', 'PublisherController@update');
-Route::get('/delete-publisher/{id}', 'PublisherController@delete');
+Route::get('/edit-publisher/{publisher}', 'PublisherController@edit');
+Route::post('/update-publisher/{publisher}', 'PublisherController@update');
+Route::get('/delete-publisher/{publisher}', 'PublisherController@delete');
 
 // Sales Route
 Route::get('/sales', 'SaleController@index');
 Route::get('/create-sale', 'SaleController@create');
 Route::post('/add-sale', 'SaleController@store');
-Route::get('/edit-sale/{id}', 'SaleController@edit');
-Route::post('/update-sale/{id}', 'SaleController@update');
-Route::get('/delete-sale/{id}', 'SaleController@delete');
+Route::get('/edit-sale/{sale}', 'SaleController@edit');
+Route::post('/update-sale/{sale}', 'SaleController@update');
+Route::get('/delete-sale/{sale}', 'SaleController@delete');
+
+// Stocks Route
+Route::get('/stocks', 'StockController@index');
+Route::get('/create-stock', 'StockController@create');
+Route::post('/add-stock', 'StockController@store');
+Route::get('/edit-stock/{stock}', 'StockController@edit');
+Route::post('/update-stock/{stock}', 'StockController@update');
+Route::get('/delete-stock/{stock}', 'StockController@delete');
 
 // Suppliers Route
 Route::get('/suppliers', 'SupplierController@index');
 Route::get('/create-supplier', 'SupplierController@create');
 Route::post('/add-supplier', 'SupplierController@store');
-Route::get('/edit-supplier/{id}', 'SupplierController@edit');
-Route::post('/update-supplier/{id}', 'SupplierController@update');
-Route::get('/delete-supplier/{id}', 'SupplierController@delete');
+Route::get('/edit-supplier/{supplier}', 'SupplierController@edit');
+Route::post('/update-supplier/{supplier}', 'SupplierController@update');
+Route::get('/delete-supplier/{supplier}', 'SupplierController@delete');
 // });

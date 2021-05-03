@@ -69,16 +69,16 @@ class SupplierController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Supplier $supplier)
     {
-        $supplier = Supplier::find($id);
+        // $supplier = Supplier::find($id);
         return view('supplier.edit_supplier')
             ->with('supplier', $supplier);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Supplier $supplier)
     {
-        $id = $request->id;
+        // $id = $request->id;
         //Validate what's coming in
         $this->validate(request(), array(
             'first_name' => 'required',
@@ -88,7 +88,7 @@ class SupplierController extends Controller
             'address' => 'required',
             'email' => 'required|email:rfc,dns',
         ));
-        $supplier = Supplier::find($id);
+        // $supplier = Supplier::find($id);
         $supplier->first_name = request()->first_name;
         $supplier->last_name = request()->last_name;
         $supplier->book_id = request()->book_id;
@@ -101,10 +101,10 @@ class SupplierController extends Controller
         return back();
     }
 
-    public function delete($id)
+    public function delete(Supplier $supplier)
     {
         /** Find and delete it */
-        $supplier = Supplier::find($id);
+        // $supplier = Supplier::find($id);
         $supplier->delete();
 
         return redirect('/suppliers');

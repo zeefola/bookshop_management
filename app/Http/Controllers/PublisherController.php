@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\PublisherRequest;
 use App\Publisher;
 
 class PublisherController extends Controller
@@ -18,15 +19,13 @@ class PublisherController extends Controller
         return view('publisher.add_publisher');
     }
 
-    public function store()
+    public function store(PublisherRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'publisher_name' => 'required',
-        ));
+        $validatedData = $request->validated();
 
         $publisher = new Publisher();
-        $publisher->publisher_name = request()->publisher_name;
+        $publisher->publisher_name = $validatedData['publisher_name'];
         $publisher->user_id = auth()->user()->id;
         $publisher->save();
 
@@ -34,32 +33,29 @@ class PublisherController extends Controller
         return back();
     }
 
-    public function edit($id)
+    public function edit(Publisher $publisher)
     {
-        $publisher = Publisher::find($id);
+        // $publisher = Publisher::find($id);
         return view('publisher.edit_publisher')
             ->with('publisher', $publisher);
     }
 
-    public function update(Request $request)
+    public function update(PublisherRequest $request, Publisher $publisher)
     {
-        $id = $request->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'publisher_name' => 'required',
-        ));
-        $publisher = Publisher::find($id);
-        $publisher->publisher_name = request()->publisher_name;
+        $validatedData = $request->validated();
+
+        $publisher->publisher_name = $validatedData['publisher_name'];
         $publisher->save();
 
         session()->flash('success_report', 'Publisher Updated Successfully');
         return back();
     }
 
-    public function delete($id)
+    public function delete(Publisher $publisher)
     {
         /** Find and delete it */
-        $publisher = Publisher::find($id);
+        // $publisher = Publisher::find($id);
         $publisher->delete();
 
         return redirect('/publishers');

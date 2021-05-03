@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Author;
+use App\Http\Requests\AuthorRequest;
 
 class AuthorController extends Controller
 {
@@ -24,17 +25,14 @@ class AuthorController extends Controller
         return view('author.add_author');
     }
 
-    public function store()
+    public function store(AuthorRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required'
-        ));
+        $validatedData = $request->validated();
 
         $author = new Author();
-        $author->first_name = request()->first_name;
-        $author->last_name = request()->last_name;
+        $author->first_name = $validatedData['first_name'];
+        $author->last_name = $validatedData['last_name'];
         $author->user_id = auth()->user()->id;
         $author->save();
 
@@ -49,17 +47,14 @@ class AuthorController extends Controller
             ->with('author', $author);
     }
 
-    public function update(Request $request, Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
-        // $id = $request->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-        ));
-        // $author = Author::find($id);
-        $author->first_name = request()->first_name;
-        $author->last_name = request()->last_name;
+        $validatedData = $request->validated();
+
+        $author->first_name = $validatedData['first_name'];
+        $author->last_name = $validatedData['last_name'];
+        $author->user_id = auth()->user()->id;
         $author->save();
 
         session()->flash('success_report', 'Author Updated Successfully');

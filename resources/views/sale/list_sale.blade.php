@@ -1,6 +1,10 @@
 {{-- <body class="hold-transition sidebar-mini"> --}}
 @extends('layouts.layout')
 
+@section('title')
+    Sales | {{ config('app.name') }}
+@endsection
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
