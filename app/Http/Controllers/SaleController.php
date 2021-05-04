@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Sale;
 use App\Book;
 use App\Customer;
 use App\Employee;
+use App\Http\Requests\SaleRequest;
 
 class SaleController extends Controller
 {
@@ -27,17 +27,10 @@ class SaleController extends Controller
         return view('sale.add_sale');
     }
 
-    public function store()
+    public function store(SaleRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_id' => 'required',
-            'customer_id' => 'required',
-            'employee_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'sales_date' => 'required'
-        ));
+        $validatedData = $request->validated();
 
         //Verify if there's a book, customer and employee record created by the user with that id before inserting record
         $verify_book = Book::where([
@@ -54,16 +47,18 @@ class SaleController extends Controller
             ['id', request()->employee_id],
             ['user_id', auth()->user()->id],
         ])->exists();
+
+        //Create a new record if the ids exist , otherwise display an error message
         if ($verify_book) {
             if ($verify_customer) {
                 if ($verify_employee) {
                     $sale = new Sale();
-                    $sale->book_id = request()->book_id;
-                    $sale->customer_id = request()->customer_id;
-                    $sale->employee_id = request()->employee_id;
-                    $sale->quantity = request()->quantity;
-                    $sale->price = request()->price;
-                    $sale->sales_date = request()->sales_date;
+                    $sale->book_id = $validatedData['book_id'];
+                    $sale->customer_id = $validatedData['customer_id'];
+                    $sale->employee_id = $validatedData['employee_id'];
+                    $sale->quantity = $validatedData['quantity'];
+                    $sale->price = $validatedData['price'];
+                    $sale->sales_date = $validatedData['sales_date'];
                     $sale->user_id = auth()->user()->id;
                     $sale->save();
 
@@ -96,22 +91,15 @@ class SaleController extends Controller
             ->with('sale', $sale);
     }
 
-    public function update(Request $request, Sale $sale)
+    public function update(SaleRequest $request, Sale $sale)
     {
-        // $id = $request->id;
+
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_id' => 'required',
-            'customer_id' => 'required',
-            'employee_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'sales_date' => 'required'
-        ));
-        // $sale = Sale::find($id);
-        $sale->book_id = request()->book_id;
-        $sale->quantity = request()->quantity;
-        $sale->price = request()->price;
+        $validatedData = $request->validated();
+
+        $sale->book_id = $validatedData['book_id'];
+        $sale->quantity = $validatedData['quantity'];
+        $sale->price = $validatedData['price'];
         $sale->save();
 
         session()->flash('success_report', 'Sales Updated Successfully');
@@ -120,8 +108,7 @@ class SaleController extends Controller
 
     public function delete(Sale $sale)
     {
-        /** Find and delete it */
-        // $sale = sale::find($id);
+        /** delete the record */
         $sale->delete();
 
         return redirect('/sales');

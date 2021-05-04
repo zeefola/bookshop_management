@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Supplier;
-use GuzzleHttp\Middleware;
 use App\Book;
+use App\Http\Requests\SupplierRequest;
 
 class SupplierController extends Controller
 {
@@ -27,18 +26,11 @@ class SupplierController extends Controller
         return view('supplier.add_supplier');
     }
 
-    public function store()
+    public function store(SupplierRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'book_id' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            // 'email' => 'required|email:rfc,dns',
-            'email' => 'required|email',
-        ));
+        $validatedData = $request > validated();
+
         //Verify if there's a book record created by the user with that id before inserting record
         $verify_id = Book::where([
             ['id', request()->book_id],
@@ -46,16 +38,14 @@ class SupplierController extends Controller
         ])->exists();
 
         if ($verify_id) {
-
-            // return auth()->user()->id . 'The Book Id is:' . request()->book_id;
             //Store data
             $supplier = new Supplier();
-            $supplier->first_name = request()->first_name;
-            $supplier->last_name = request()->last_name;
-            $supplier->book_id = request()->book_id;
-            $supplier->phone_number = request()->phone_number;
-            $supplier->address = request()->address;
-            $supplier->email = request()->email;
+            $supplier->first_name = $validatedData['first_name'];
+            $supplier->last_name = $validatedData['last_name'];
+            $supplier->book_id = $validatedData['book_id'];
+            $supplier->phone_number = $validatedData['phone_number'];
+            $supplier->address = $validatedData['address'];
+            $supplier->email = $validatedData['email'];
             $supplier->user_id = auth()->user()->id;
             $supplier->save();
 
@@ -76,25 +66,17 @@ class SupplierController extends Controller
             ->with('supplier', $supplier);
     }
 
-    public function update(Request $request, Supplier $supplier)
+    public function update(SupplierRequest $request, Supplier $supplier)
     {
-        // $id = $request->id;
         //Validate what's coming in
-        $this->validate(request(), array(
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'book_id' => 'required',
-            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'email' => 'required|email:rfc,dns',
-        ));
-        // $supplier = Supplier::find($id);
-        $supplier->first_name = request()->first_name;
-        $supplier->last_name = request()->last_name;
-        $supplier->book_id = request()->book_id;
-        $supplier->phone_number = request()->phone_number;
-        $supplier->address = request()->address;
-        $supplier->email = request()->email;
+        $validatedData = $request->validated();
+
+        $supplier->first_name = $validatedData['first_name'];
+        $supplier->last_name = $validatedData['last_name'];
+        $supplier->book_id = $validatedData['book_id'];
+        $supplier->phone_number = $validatedData['phone_number'];
+        $supplier->address = $validatedData['address'];
+        $supplier->email = $validatedData['email'];
         $supplier->save();
 
         session()->flash('success_report', 'Supplier Updated Successfully');

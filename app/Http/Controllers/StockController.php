@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Stock;
 use App\Book;
-use Symfony\Component\Console\Input\Input;
+use App\Http\Requests\StockRequest;
 
 class StockController extends Controller
 {
@@ -26,16 +25,11 @@ class StockController extends Controller
         return view('stock.add_stock');
     }
 
-    public function store()
+    public function store(StockRequest $request)
     {
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'stock_date' => 'required',
-            // 'user_id' => 'required'
-        ));
+        $validatedData = $request->validated();
+
         //Verify if there's a book record created by the user with that id before inserting record
         $verify_id = Book::where([
             ['id', request()->book_id],
@@ -47,11 +41,11 @@ class StockController extends Controller
             // return auth()->user()->id . 'The Book Id is:' . request()->book_id;
             //Store data
             $stock = new Stock();
-            $stock->book_id = request()->book_id;
+            $stock->book_id = $validatedData['book_id'];
             $stock->user_id = auth()->user()->id;
-            $stock->quantity = request()->quantity;
-            $stock->price = request()->price;
-            $stock->stock_date = request()->stock_date;
+            $stock->quantity = $validatedData['quantity'];
+            $stock->price = $validatedData['price'];
+            $stock->stock_date = $validatedData['stock_date'];
             $stock->save();
 
             session()->flash('success_report', 'Stock Added Successfully');
@@ -71,20 +65,16 @@ class StockController extends Controller
             ->with('stock', $stock);
     }
 
-    public function update(Stock $stock)
+    public function update(StockRequest $request, Stock $stock)
     {
-        // $id = $request->id;
+
         //Validate what's coming in
-        $this->validate(request(), array(
-            'book_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'stock_date' => 'required'
-        ));
-        // $stock = Stock::find($id);
-        $stock->book_id = request()->book_id;
-        $stock->quantity = request()->quantity;
-        $stock->price = request()->price;
+        $validatedData = $request->validated();
+
+        $stock->book_id = $validatedData['book_id'];
+        $stock->quantity = $validatedData['quantity'];
+        $stock->price = $validatedData['price'];
+        // $stock->stock_date = $validatedData['stock_date'];
         $stock->save();
 
         session()->flash('success_report', 'Stock Updated Successfully');
