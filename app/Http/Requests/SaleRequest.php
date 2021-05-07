@@ -24,12 +24,21 @@ class SaleRequest extends FormRequest
     public function rules()
     {
         return [
-            'book_id' => 'required',
-            'customer_id' => 'required',
-            'employee_id' => 'required',
+            'book_id' => 'required|exists:books,id,user_id,' . auth()->user()->id,
+            'customer_id' => 'required|exists:customers,id,user_id,' . auth()->user()->id,
+            'employee_id' => 'required|exists:employees,id,user_id,' . auth()->user()->id,
             'quantity' => 'required',
             'price' => 'required',
             'sales_date' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'book_id.exists' => 'BookID doesn\'t exist, Create a record & try again!!',
+            'customer_id.exists' => 'CustomerID doesn\'t exist, Create a record & try again!!',
+            'employee_id.exists' => 'EmployeeID doesn\'t exist, Create a record & try again!!',
         ];
     }
 }

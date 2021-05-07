@@ -26,10 +26,17 @@ class SupplierRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'book_id' => 'required',
+            'book_id' => 'required|exists:books,id,user_id,' . auth()->user()->id,
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
             'email' => 'required|email:rfc,dns',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'book_id.exists' => 'BookID doesn\'t exist, Create a record & try again!!',
         ];
     }
 }

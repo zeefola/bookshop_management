@@ -25,12 +25,21 @@ class BookRequest extends FormRequest
     {
         return [
             'book_title' => 'required',
-            'author_id' => 'required',
-            'publisher_id' => 'required',
+            'author_id' => 'required|exists:authors,id,user_id,' . auth()->user()->id,
+            'publisher_id' => 'required|exists:publishers,id,user_id,' . auth()->user()->id,
             'book_edition' => 'required',
             'isbn_number' => 'required',
             'published_date' => 'required',
-            'published_country' => 'required'
+            'published_country' => 'required',
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'author_id.exists' => 'AuthorID doesn\'t exist, Create a record & try again!!',
+            'publisher_id.exists' => 'PublisherID doesn\'t exist, Create a record & try again!!',
         ];
     }
 }

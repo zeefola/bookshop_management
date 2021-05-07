@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
-use App\Book;
-use App\Customer;
-use App\Employee;
 use App\Http\Requests\SaleRequest;
 
 class SaleController extends Controller
@@ -32,56 +29,18 @@ class SaleController extends Controller
         //Validate what's coming in
         $validatedData = $request->validated();
 
-        //Verify if there's a book, customer and employee record created by the user with that id before inserting record
-        $verify_book = Book::where([
-            ['id', request()->book_id],
-            ['user_id', auth()->user()->id],
-        ])->exists();
+        $sale = new Sale();
+        $sale->book_id = $validatedData['book_id'];
+        $sale->customer_id = $validatedData['customer_id'];
+        $sale->employee_id = $validatedData['employee_id'];
+        $sale->quantity = $validatedData['quantity'];
+        $sale->price = $validatedData['price'];
+        $sale->sales_date = $validatedData['sales_date'];
+        $sale->user_id = auth()->user()->id;
+        $sale->save();
 
-        $verify_customer = Customer::where([
-            ['id', request()->customer_id],
-            ['user_id', auth()->user()->id],
-        ])->exists();
-
-        $verify_employee = Employee::where([
-            ['id', request()->employee_id],
-            ['user_id', auth()->user()->id],
-        ])->exists();
-
-        //Create a new record if the ids exist , otherwise display an error message
-        if ($verify_book) {
-            if ($verify_customer) {
-                if ($verify_employee) {
-                    $sale = new Sale();
-                    $sale->book_id = $validatedData['book_id'];
-                    $sale->customer_id = $validatedData['customer_id'];
-                    $sale->employee_id = $validatedData['employee_id'];
-                    $sale->quantity = $validatedData['quantity'];
-                    $sale->price = $validatedData['price'];
-                    $sale->sales_date = $validatedData['sales_date'];
-                    $sale->user_id = auth()->user()->id;
-                    $sale->save();
-
-                    session()->flash('success_report', 'Sale Added Successfully');
-                    return back();
-                }
-                //Otherwise Show error message
-                else {
-                    session()->flash('failure_report', 'EmployeeID doesn\'t exist, Create a record & try again!!');
-                    return back()->withInput();
-                }
-            }
-            //Otherwise Show error message
-            else {
-                session()->flash('failure_report', 'CustomerID doesn\'t exist, Create a record & try again!!');
-                return back()->withInput();
-            }
-        }
-        //Otherwise Show error message
-        else {
-            session()->flash('failure_report', 'BookID doesn\'t exist, Create a record & try again!!');
-            return back()->withInput();
-        }
+        session()->flash('success_report', 'Sale Added Successfully');
+        return back();
     }
 
     public function edit(Sale $sale)

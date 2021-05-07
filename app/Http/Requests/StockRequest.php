@@ -24,10 +24,17 @@ class StockRequest extends FormRequest
     public function rules()
     {
         return [
-            'book_id' => 'required',
+            'book_id' => 'required|exists:books,id,user_id,' . auth()->user()->id,
             'quantity' => 'required',
             'price' => 'required',
             'stock_date' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'book_id.exists' => 'BookID doesn\'t exist, Create a record & try again!!',
         ];
     }
 }
