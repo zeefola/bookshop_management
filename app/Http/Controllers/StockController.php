@@ -65,10 +65,10 @@ class StockController extends Controller
         return back();
     }
 
-    public function delete(Stock $stock)
+    public function destroy(Stock $stock)
     {
-        /** Find and delete it */
         $stock->delete();
-        return redirect('/stocks');
+        session()->flash('failure_report', 'Stock Deleted Successfully');
+        return back();
     }
 }

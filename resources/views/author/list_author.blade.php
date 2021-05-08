@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-author"
-                                    style="color:white;">
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a
+                                    href="{{ route('author.create') }}" style="color:white;">
                                     Add New </a>
                             </button>
 
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
+            @includeIf('layouts.error_template')
         </section>
 
         <!-- Main content -->
@@ -55,10 +56,10 @@
                                     <th style="width: 20%">
                                         First Name
                                     </th>
-                                    <th style="width: 30%">
+                                    <th style="width: 20%">
                                         Last Name
                                     </th>
-                                    <th style="width: 20%">
+                                    <th style="width: 30%">
                                     </th>
                                 </tr>
                             </thead>
@@ -75,16 +76,26 @@
                                             {{ $author->last_name }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="/edit-author/{{ $author->id }}">
+                                            <a class="btn btn-info btn-sm" href="{{ route('author.edit', $author->id) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="/delete-author/{{ $author->id }}">
+                                            <form style="display: inline-block;" method="POST"
+                                                action="{{ route('author.destroy', $author->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    style="margin-top: 5px;">
+                                                    <i class="fas fa-trash">
+                                                    </i>Delete</button>
+                                            </form>
+                                            {{-- <a class="btn btn-danger btn-sm"
+                                                href="{{ route('author.destroy', $author->id) }}">
                                                 <i class="fas fa-trash">
                                                 </i>
                                                 Delete
-                                            </a>
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach

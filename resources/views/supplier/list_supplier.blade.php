@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-supplier"
-                                    style="color:white;">
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a
+                                    href="{{ route('supplier.create') }}" style="color:white;">
                                     Add New </a>
                             </button>
 
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
+            @includeIf('layouts.error_template')
         </section>
 
         <!-- Main content -->
@@ -99,16 +100,21 @@
                                             {{ $supplier->email }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="/edit-supplier/{{ $supplier->id }}">
+                                            <a class="btn btn-info btn-sm"
+                                                href="{{ route('supplier.edit', $supplier->id) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="/delete-supplier/{{ $supplier->id }}">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </a>
+                                            <form style="display: inline-block;" method="POST"
+                                                action="{{ route('supplier.destroy', $supplier->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    style="margin-top: 5px;">
+                                                    <i class="fas fa-trash">
+                                                    </i>Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

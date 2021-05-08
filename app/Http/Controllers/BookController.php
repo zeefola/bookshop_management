@@ -70,10 +70,10 @@ class BookController extends Controller
         return back();
     }
 
-    public function delete(Book $book)
+    public function destroy(Book $book)
     {
         $book->delete();
-
-        return redirect('/books');
+        session()->flash('failure_report', 'Book Deleted Successfully');
+        return back();
     }
 }

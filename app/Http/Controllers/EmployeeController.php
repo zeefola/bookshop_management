@@ -68,12 +68,10 @@ class EmployeeController extends Controller
         return back();
     }
 
-    public function delete(Employee $employee)
+    public function destroy(Employee $employee)
     {
-        /** Find and delete it */
-        // $employee = employee::find($id);
         $employee->delete();
-
-        return redirect('/employees');
+        session()->flash('failure_report', 'Employee Deleted Successfully');
+        return back();
     }
 }

@@ -16,8 +16,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/publishers"
-                                    style="color:white;">
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a
+                                    href="{{ route('publisher.index') }}" style="color:white;">
                                     Go back </a>
                             </button>
 
@@ -41,7 +41,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="/add-publisher" method="POST">
+                            <form class="form-horizontal" action="{{ route('publisher.store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">

@@ -68,12 +68,10 @@ class CustomerController extends Controller
         return back();
     }
 
-    public function delete(Customer $customer)
+    public function destroy(Customer $customer)
     {
-        /** Find and delete it */
-        // $customer = Customer::find($id);
         $customer->delete();
-
-        return redirect('/customers');
+        session()->flash('failure_report', 'Customer Deleted Successfully');
+        return back();
     }
 }

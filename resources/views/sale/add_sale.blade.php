@@ -16,8 +16,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/sales"
-                                    style="color:white;">
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a
+                                    href="{{ route('sale.index') }}" style="color:white;">
                                     Go back </a>
                             </button>
 

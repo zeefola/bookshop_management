@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <button type="button" class="btn btn-block btn-success btn-sm"> <a href="/create-book"
-                                    style="color:white;">
+                            <button type="button" class="btn btn-block btn-success btn-sm"> <a
+                                    href="{{ route('book.create') }}" style="color:white;">
                                     Add New </a>
                             </button>
 
@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
+            @includeIf('layouts.error_template')
         </section>
 
         <!-- Main content -->
@@ -105,16 +106,20 @@
                                             {{ $book->published_country }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="/edit-book/{{ $book->id }}">
+                                            <a class="btn btn-info btn-sm" href="{{ route('book.edit', $book->id) }}">
                                                 <i class="fas fa-pencil-alt">
                                                 </i>
                                                 Edit
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="/delete-book/{{ $book->id }}">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </a>
+                                            <form style="display: inline-block;" method="POST"
+                                                action="{{ route('book.destroy', $book->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    style="margin-top: 5px;">
+                                                    <i class="fas fa-trash">
+                                                    </i>Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

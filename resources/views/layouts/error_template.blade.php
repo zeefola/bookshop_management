@@ -23,7 +23,7 @@
 @if (session()->has('failure_report'))
     <div class="alert alert-danger alert-block">
         <a class="close" data-dismiss="alert" href="#">×</a>
-        <h4 class="alert-heading">Error!</h4>
+        {{-- <h4 class="alert-heading">Error!</h4> --}}
         {{ session()->get('failure_report') }}
     </div>
     <br />

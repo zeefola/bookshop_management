@@ -38,7 +38,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/stocks" class="nav-link {{ Request::is('stocks') ? 'active' : '' }}">
+                    <a href="{{ route('stock.index') }}"
+                        class="nav-link {{ Request::is('stock') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Stock
@@ -47,7 +48,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/authors" class="nav-link {{ Request::is('authors') ? 'active' : '' }}">
+                    <a href="{{ route('author.index') }}"
+                        class="nav-link {{ Request::is('author') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Author
@@ -56,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/sales" class="nav-link {{ Request::is('sales') ? 'active' : '' }}">
+                    <a href="{{ route('sale.index') }}" class="nav-link {{ Request::is('sale') ? 'active' : '' }}">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Sales
@@ -65,7 +67,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/customers" class="nav-link {{ Request::is('customers') ? 'active' : '' }}">
+                    <a href="{{ route('customer.index') }}"
+                        class="nav-link {{ Request::is('customer') ? 'active' : '' }}">
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Customer
@@ -73,7 +76,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/employees" class="nav-link {{ Request::is('employees') ? 'active' : '' }}">
+                    <a href="{{ route('employee.index') }}"
+                        class="nav-link {{ Request::is('employee') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Employee
@@ -82,7 +86,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/books" class="nav-link {{ Request::is('books') ? 'active' : '' }}">
+                    <a href="{{ route('book.index') }}"
+                        class="nav-link {{ Request::is('book') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Book
@@ -90,13 +95,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/publishers" class="nav-link {{ Request::is('publishers') ? 'active' : '' }}">
+                    <a href="{{ route('publisher.index') }}"
+                        class="nav-link {{ Request::is('publisher') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file"></i>
                         <p>Publisher</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/suppliers" class="nav-link {{ Request::is('suppliers') ? 'active' : '' }}">
+                    <a href="{{ route('supplier.index') }}"
+                        class="nav-link {{ Request::is('supplier') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
                             Supplier

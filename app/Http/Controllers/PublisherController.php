@@ -52,12 +52,10 @@ class PublisherController extends Controller
         return back();
     }
 
-    public function delete(Publisher $publisher)
+    public function destroy(Publisher $publisher)
     {
-        /** Find and delete it */
-        // $publisher = Publisher::find($id);
         $publisher->delete();
-
-        return redirect('/publishers');
+        session()->flash('failure_report', 'Publisher Deleted Successfully');
+        return back();
     }
 }

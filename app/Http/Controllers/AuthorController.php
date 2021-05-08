@@ -61,11 +61,10 @@ class AuthorController extends Controller
         return back();
     }
 
-    public function delete(Author $author)
+    public function destroy(Author $author)
     {
-        /** Find and delete it */
-        // $author = Author::find($id);
         $author->delete();
-        return redirect('/authors');
+        session()->flash('failure_report', 'Author Deleted Successfully');
+        return back();
     }
 }

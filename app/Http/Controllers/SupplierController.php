@@ -28,7 +28,7 @@ class SupplierController extends Controller
     public function store(SupplierRequest $request)
     {
         //Validate what's coming in
-        $validatedData = $request > validated();
+        $validatedData = $request->validated();
 
         //Store data
         $supplier = new Supplier();
@@ -68,11 +68,11 @@ class SupplierController extends Controller
         return back();
     }
 
-    public function delete(Supplier $supplier)
+    public function destroy(Supplier $supplier)
     {
 
         $supplier->delete();
-
-        return redirect('/suppliers');
+        session()->flash('failure_report', 'Supplier Deleted Successfully');
+        return back();
     }
 }
