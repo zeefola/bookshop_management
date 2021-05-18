@@ -14,6 +14,7 @@ class PublisherController extends Controller
         return view('publisher.list_publisher')
             ->with('publishers', $publishers);
     }
+
     public function create()
     {
         return view('publisher.add_publisher');

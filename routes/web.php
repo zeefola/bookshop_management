@@ -29,29 +29,31 @@ Route::get('/', function () {
 
 // Application Routes
 
-//Dashboard Route
-Route::get('/dashboard', 'HomeController@index');
+Route::middleware('auth')->group(function () {
+    //Dashboard Route
+    Route::get('/dashboard', 'HomeController@index');
 
-// Books Route
-Route::resource('book', 'BookController');
+    // Books Route
+    Route::resource('book', 'BookController');
 
-// Customers Route
-Route::resource('customer', 'CustomerController');
+    // Customers Route
+    Route::resource('customer', 'CustomerController');
 
-// Employees Route
-Route::resource('employee', 'EmployeeController');
+    // Employees Route
+    Route::resource('employee', 'EmployeeController');
 
-// Publishers Route
-Route::resource('publisher', 'PublisherController');
+    // Publishers Route
+    Route::resource('publisher', 'PublisherController');
 
-// Sales Route
-Route::resource('sale', 'SaleController');
+    // Sales Route
+    Route::resource('sale', 'SaleController');
 
-// Suppliers Route
-Route::resource('supplier', 'SupplierController');
+    // Suppliers Route
+    Route::resource('supplier', 'SupplierController');
 
-// Authors Route
-Route::resource('author', 'AuthorController', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+    // Authors Route
+    Route::resource('author', 'AuthorController', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
-// Stocks Route
-Route::resource('stock', 'StockController');
+    // Stocks Route
+    Route::resource('stock', 'StockController');
+});
