@@ -33,6 +33,11 @@ class AuthorController extends Controller
         $author = new Author();
         $author->first_name = $validatedData['first_name'];
         $author->last_name = $validatedData['last_name'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $author->addMediaFromRequest('image')
+                ->toMediaCollection();
+        }
         $author->user_id = auth()->user()->id;
         $author->save();
 
@@ -54,6 +59,10 @@ class AuthorController extends Controller
 
         $author->first_name = $validatedData['first_name'];
         $author->last_name = $validatedData['last_name'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $author->addMediaFromRequest('image')->toMediaCollection('images');
+        }
         $author->user_id = auth()->user()->id;
         $author->save();
 

@@ -27,6 +27,10 @@ class PublisherController extends Controller
 
         $publisher = new Publisher();
         $publisher->publisher_name = $validatedData['publisher_name'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $publisher->addMediaFromRequest('image')->toMediaCollection('images');
+        }
         $publisher->user_id = auth()->user()->id;
         $publisher->save();
 

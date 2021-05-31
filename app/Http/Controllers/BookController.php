@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 use App\Book;
 use App\Http\Requests\BookRequest;
+use App\Exports\BooksExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookController extends Controller
 {
@@ -12,6 +14,11 @@ class BookController extends Controller
     // {
     //     $this->middleware('auth');
     // }
+
+    public function exportable()
+    {
+        return Excel::download(new BooksExport, 'books.xlsx');
+    }
 
     public function index()
     {
@@ -35,6 +42,10 @@ class BookController extends Controller
         $book->author_id = $validatedData['author_id'];
         $book->publisher_id = $validatedData['publisher_id'];
         $book->book_edition = $validatedData['book_edition'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $book->addMediaFromRequest('image')->toMediaCollection('images');
+        }
         $book->isbn_number = $validatedData['isbn_number'];
         $book->published_date = $validatedData['published_date'];
         $book->published_country = $validatedData['published_country'];
@@ -47,7 +58,6 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        // $book = Book::find($id);
         return view('book.edit_book')
             ->with('book', $book);
     }

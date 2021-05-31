@@ -34,6 +34,10 @@ class SupplierController extends Controller
         $supplier = new Supplier();
         $supplier->first_name = $validatedData['first_name'];
         $supplier->last_name = $validatedData['last_name'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $supplier->addMediaFromRequest('image')->toMediaCollection('images');
+        }
         $supplier->book_id = $validatedData['book_id'];
         $supplier->phone_number = $validatedData['phone_number'];
         $supplier->address = $validatedData['address'];

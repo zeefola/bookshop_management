@@ -41,7 +41,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="/add-sale" method="POST">
+                            <form class="form-horizontal" action="{{ route('sale.store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">

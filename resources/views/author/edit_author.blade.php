@@ -60,6 +60,13 @@
                                                 value="{{ $author->last_name }}">
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Author Image</label>
+                                        <div class="col-sm-10">
+                                            <img src="{{ $author->getFirstMediaUrl('images') }}" />
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class=" card-footer">

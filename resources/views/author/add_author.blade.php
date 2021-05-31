@@ -41,7 +41,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="{{ route('author.store') }}" method="POST">
+                            <form class="form-horizontal" action="{{ route('author.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -56,6 +57,13 @@
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="last_name" placeholder="Last Name"
                                                 value="{{ old('last_name') }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Author Image</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control" name="image"
+                                                value="{{ old('image') }}">
                                         </div>
                                     </div>
                                 </div>

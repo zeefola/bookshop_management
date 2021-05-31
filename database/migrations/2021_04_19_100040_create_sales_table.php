@@ -32,7 +32,7 @@ class CreateSalesTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->integer('quantity')->nullable();
-            $table->decimal('price', 2)->nullable();
+            $table->decimal('price')->nullable();
             $table->dateTime('sales_date')->nullable();
             $table->timestamps();
         });

@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'HomeController@index');
 
     // Books Route
+    Route::post('/books-export', 'BookController@exportable')->name('books.export');
     Route::resource('book', 'BookController');
 
     // Customers Route

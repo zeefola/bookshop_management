@@ -24,7 +24,7 @@ class CreateStocksTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->integer('quantity')->nullable();
-            $table->decimal('price', 2)->nullable();
+            $table->decimal('price')->nullable();
             $table->dateTime('stock_date')->nullable();
             $table->timestamps();
         });
