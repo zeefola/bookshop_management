@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Supplier;
 use App\Http\Requests\SupplierRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SupplierController extends Controller
 {
@@ -36,7 +37,12 @@ class SupplierController extends Controller
         $supplier->last_name = $validatedData['last_name'];
         //Store Image
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $supplier->addMediaFromRequest('image')->toMediaCollection('images');
+            //Get Image Name
+            $fileName = $request->image->getClientOriginalName();
+            //Specify new mage storage path
+            $request->image->storeAs('suppliers', $fileName, 'public');
+
+            $supplier->image = $fileName;
         }
         $supplier->book_id = $validatedData['book_id'];
         $supplier->phone_number = $validatedData['phone_number'];
@@ -66,6 +72,20 @@ class SupplierController extends Controller
         $supplier->phone_number = $validatedData['phone_number'];
         $supplier->address = $validatedData['address'];
         $supplier->email = $validatedData['email'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //Get Image Name
+            $fileName = $request->image->getClientOriginalName();
+            //Check if Author has image record, if yes Delete it
+            if ($supplier->image) {
+                $path = asset('storage/suppliers/' . $supplier->image);
+                Storage::delete($path);
+            }
+            //Specify new mage storage path
+            $request->image->storeAs('suppliers', $fileName, 'public');
+
+            $supplier->image = $fileName;
+        }
         $supplier->save();
 
         session()->flash('success_report', 'Supplier Updated Successfully');

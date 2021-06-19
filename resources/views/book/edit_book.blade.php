@@ -73,6 +73,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Book Cover</label>
+                                        <div class="col-sm-10">
+                                            <img class="direct-chat-img"
+                                                src="{{ asset('storage/books/' . $book->image) }}" />
+                                            <input type="file" class="form-control" name="image">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Book Edition</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="book_edition"

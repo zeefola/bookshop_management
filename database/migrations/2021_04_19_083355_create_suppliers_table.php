@@ -28,7 +28,7 @@ class CreateSuppliersTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
-            // $table->string('gender')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

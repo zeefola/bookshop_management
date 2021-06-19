@@ -3,13 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Book extends Model implements HasMedia
+class Book extends Model
 {
-    use InteractsWithMedia;
-
     public function author()
     {
         return $this->belongsTo('App\Author');

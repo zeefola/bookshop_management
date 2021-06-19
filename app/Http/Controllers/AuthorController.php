@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Author;
 use App\Http\Requests\AuthorRequest;
 
@@ -35,8 +35,12 @@ class AuthorController extends Controller
         $author->last_name = $validatedData['last_name'];
         //Store Image
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $author->addMediaFromRequest('image')
-                ->toMediaCollection();
+            //Get file name
+            $fileName = $request->image->getClientOriginalName();
+            //Specify image storage folder
+            $request->image->storeAs('authors', $fileName, 'public');
+
+            $author->image = $fileName;
         }
         $author->user_id = auth()->user()->id;
         $author->save();
@@ -59,9 +63,20 @@ class AuthorController extends Controller
 
         $author->first_name = $validatedData['first_name'];
         $author->last_name = $validatedData['last_name'];
+
         //Store Image
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $author->addMediaFromRequest('image')->toMediaCollection('images');
+            //Get Image Name
+            $fileName = $request->image->getClientOriginalName();
+            //Check if Author has image record, if yes Delete it
+            if ($author->image) {
+                $path = asset('storage/authors/' . $author->image);
+                Storage::delete($path);
+            }
+            //Specify new mage storage path
+            $request->image->storeAs('authors', $fileName, 'public');
+
+            $author->image = $fileName;
         }
         $author->user_id = auth()->user()->id;
         $author->save();

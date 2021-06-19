@@ -26,6 +26,7 @@ class AuthorRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
+            'image' => ['sometimes', 'mimes:png,jpg,jpeg'],
         ];
     }
 }

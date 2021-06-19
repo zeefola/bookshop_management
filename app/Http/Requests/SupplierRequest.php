@@ -30,6 +30,7 @@ class SupplierRequest extends FormRequest
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
             'email' => 'required|email:rfc,dns',
+            'image' => ['sometimes', 'mimes:png,jpg,jpeg'],
         ];
     }
 

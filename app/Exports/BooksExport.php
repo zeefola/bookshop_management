@@ -5,9 +5,10 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Book;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+// use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-
-class BooksExport implements FromCollection, WithHeadings
+class BooksExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -24,12 +25,13 @@ class BooksExport implements FromCollection, WithHeadings
             'BOOK NAME',
             'AUTHOR ID',
             'PUBLISHER ID',
+            'USER ID',
             'BOOK EDITION',
             'ISBN NUMBER',
             'YEAR OF PUBLISH',
             'COUNTRY',
-            'CREATED_AT',
-            'UPDATED_AT',
+            'CREATED AT',
+            'UPDATED AT',
 
         ];
     }

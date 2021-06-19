@@ -75,7 +75,9 @@
                                                         {{ $author->last_name }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ $author->getFirstMediaUrl() }}" />
+                                                        <img class="direct-chat-img"
+                                                            src="{{ asset('storage/authors/' . $author->image) }}"
+                                                            alt="author_img" />
                                                     </td>
                                                     <td class="project-actions text-right">
                                                         <a class="btn btn-info btn-sm"

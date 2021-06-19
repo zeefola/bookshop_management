@@ -28,6 +28,7 @@ class BookRequest extends FormRequest
             'author_id' => 'required|exists:authors,id,user_id,' . auth()->user()->id,
             'publisher_id' => 'required|exists:publishers,id,user_id,' . auth()->user()->id,
             'book_edition' => 'required',
+            'image' => ['sometimes', 'mimes:png,jpg,jpeg'],
             'isbn_number' => 'required',
             'published_date' => 'required',
             'published_country' => 'required',

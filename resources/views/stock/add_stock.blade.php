@@ -41,7 +41,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="{{ route('stock.store') }}" method="POST">
+                            <form class="form-horizontal" action="{{ route('stock.store') }}"
+                                 method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group row">
@@ -70,6 +71,13 @@
                                         <div class="col-sm-10">
                                             <input type="date" class="form-control" name="stock_date"
                                                 value="{{ old('stock_date') }}" placeholder="Stock Date">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Logo</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control" name="image"
+                                                value="{{ old('image') }}">
                                         </div>
                                     </div>
                                 </div>

@@ -59,6 +59,7 @@
                                                 <th>
                                                     Stock Date
                                                 </th>
+
                                                 <th>
                                                     Action
                                                 </th>
@@ -82,6 +83,7 @@
                                                     <td>
                                                         {{ date('d-M-Y', strtotime($stock->stock_date)) }}
                                                     </td>
+                                                    
                                                     <td class="project-actions text-right">
                                                         <a class="btn btn-info btn-sm"
                                                             href="{{ route('stock.edit', $stock->id) }}">

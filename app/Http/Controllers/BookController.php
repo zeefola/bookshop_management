@@ -17,7 +17,7 @@ class BookController extends Controller
 
     public function exportable()
     {
-        return Excel::download(new BooksExport, 'books.xlsx');
+        return Excel::download(new BooksExport, 'Books Report.xlsx');
     }
 
     public function index()
@@ -44,7 +44,12 @@ class BookController extends Controller
         $book->book_edition = $validatedData['book_edition'];
         //Store Image
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $book->addMediaFromRequest('image')->toMediaCollection('images');
+            //Get file Name
+            $fileName = $request->image->getClientOriginalName();
+            //Specify where file should store
+            $request->image->storeAs('books', $fileName, 'public');
+
+            $book->image = $fileName;
         }
         $book->isbn_number = $validatedData['isbn_number'];
         $book->published_date = $validatedData['published_date'];
@@ -71,6 +76,15 @@ class BookController extends Controller
         $book->author_id = $validatedData['author_id'];
         $book->publisher_id = $validatedData['publisher_id'];
         $book->book_edition = $validatedData['book_edition'];
+        //Store Image
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //Get file Name
+            $fileName = $request->image->getClientOriginalName();
+            //Specify where file should store
+            $request->image->storeAs('books', $fileName, 'public');
+
+            $book->image = $fileName;
+        }
         $book->isbn_number = $validatedData['isbn_number'];
         $book->published_date = $validatedData['published_date'];
         $book->published_country = $validatedData['published_country'];

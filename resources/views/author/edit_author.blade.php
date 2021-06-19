@@ -41,8 +41,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="{{ route('author.update', $author->id) }}"
-                                method="POST">
+                            <form class="form-horizontal" action="{{ route('author.update', $author->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -63,7 +63,8 @@
                                     <div class="form-group row">
                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Author Image</label>
                                         <div class="col-sm-10">
-                                            <img src="{{ $author->getFirstMediaUrl('images') }}" />
+                                            <img class="direct-chat-img"
+                                                src="{{ asset('storage/authors/' . $author->image) }}" />
                                             <input type="file" class="form-control" name="image">
                                         </div>
                                     </div>

@@ -41,7 +41,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-users"></i>
                             </div>
-                            <a href="/employees" class="small-box-footer">More info <i
+                            <a href="/employee" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -66,12 +66,12 @@
                             <div class="inner">
                                 <h3>{{ $stock > 0 ? $stock : 0 }}</h3>
 
-                                <p>Books Quantity Stocked</p>
+                                <p>Overall Books Quantity Stocked</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="/stocks" class="small-box-footer">More info <i
+                            <a href="/stock" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <div class="icon">
                                 <i class="ion ion-edit"></i>
                             </div>
-                            <a href="/authors" class="small-box-footer">More info <i
+                            <a href="/author" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -98,13 +98,12 @@
                             <div class="inner">
                                 <h3>{{ $sale > 0 ? $sale : 0 }}</h3>
 
-                                <p>Books Quantity Sold</p>
+                                <p>Overall Books Quantity Sold</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="/sales" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/sale" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -114,13 +113,12 @@
                             <div class="inner">
                                 <h3>{{ $book > 0 ? $book : 0 }}</h3>
 
-                                <p>Books Registered</p>
+                                <p>Overall Books Registered</p>
                             </div>
                             <div class="icon">
                                 <i class="nav-icon fas fa-book"></i>
                             </div>
-                            <a href="/books" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/book" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -135,7 +133,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-file"></i>
                             </div>
-                            <a href="/publishers" class="small-box-footer">More info <i
+                            <a href="/publisher" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -151,7 +149,7 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="/customers" class="small-box-footer">More info <i
+                            <a href="/customer" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -167,10 +165,41 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-copy"></i>
                             </div>
-                            <a href="/suppliers" class="small-box-footer">More info <i
+                            <a href="/supplier" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{ $current_stock > 0 ? $current_stock : 0 }}</h3>
+
+                                <p>Current Book Stock</p>
+                            </div>
+                            <div class="icon">
+                                <i class="nav-icon fas fa-file"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>₦ {{ $sold_item > 0 ? number_format($sold_item, 2) : 0 }}</h3>
+
+                                <p>Overall Sold Book Price </p>
+                            </div>
+                            <div class="icon">
+                                <i class="nav-icon fas fa-file"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
                     <!-- ./col -->
                 </div>
             </div><!-- /.container-fluid -->

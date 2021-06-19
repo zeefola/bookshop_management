@@ -87,7 +87,9 @@
                                                         {{ $supplier->last_name }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ $supplier->getFirstMediaUrl('images') }}" />
+                                                        <img class="direct-chat-img"
+                                                            src="{{ asset('storage/suppliers/' . $supplier->image) }}"
+                                                            alt="supplier logo" />
                                                     </td>
                                                     <td>
                                                         {{ $supplier->book_id }}

@@ -31,14 +31,10 @@ class HomeController extends Controller
         $sale = auth()->user()->sales->sum('quantity');
         $publisher = auth()->user()->publishers->count();
         $supplier = auth()->user()->suppliers->count();
-        return view('dashboard')
-            ->with('author', $author)
-            ->with('book', $book)
-            ->with('employee', $employee)
-            ->with('customer', $customer)
-            ->with('stock', $stock)
-            ->with('sale', $sale)
-            ->with('publisher', $publisher)
-            ->with('supplier', $supplier);
+        $current_stock = auth()->user()->stocks->sum('quantity') - auth()->user()->sales->sum('quantity');
+        $sold_item = auth()->user()->sales->sum('price');
+        return view('dashboard', compact(
+            ['author', 'book', 'employee', 'customer', 'stock', 'sale', 'publisher', 'supplier', 'current_stock', 'sold_item']
+        ));
     }
 }

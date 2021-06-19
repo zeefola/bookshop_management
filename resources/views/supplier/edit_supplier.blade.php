@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form class="form-horizontal" action="{{ route('supplier.update', $supplier->id) }}"
-                                method="POST">
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
@@ -87,6 +87,14 @@
                                             <input type="email" class="form-control" name="email"
                                                 value="{{ $supplier->email }}">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Supplier Logo</label>
+                                    <div class="col-sm-10">
+                                        <img class="direct-chat-img"
+                                            src="{{ asset('storage/suppliers/' . $supplier->image) }}" />
+                                        <input type="file" class="form-control" name="image">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

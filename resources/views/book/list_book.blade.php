@@ -103,7 +103,9 @@
                                                         {{ $book->book_edition }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ $book->getFirstMediaUrl('images') }}" />
+                                                        <img class="direct-chat-img" src="
+                                                                        {{ asset('storage/books/' . $book->image) }}"
+                                                            alt="book_cover" />
                                                     </td>
                                                     <td>
                                                         {{ $book->isbn_number }}

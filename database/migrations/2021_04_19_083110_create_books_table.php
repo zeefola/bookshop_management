@@ -29,6 +29,7 @@ class CreateBooksTable extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->string('book_edition')->nullable();
+            $table->string('image')->nullable();
             $table->string('isbn_number')->nullable();
             $table->year('published_date', 4)->nullable();
             $table->string('published_country')->nullable();
